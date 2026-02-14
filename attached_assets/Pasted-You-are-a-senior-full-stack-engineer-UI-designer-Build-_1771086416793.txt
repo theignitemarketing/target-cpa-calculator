@@ -1,0 +1,112 @@
+You are a senior full-stack engineer + UI designer. Build a “Target CPA Calculator” web app (PPC Bidding Tool) that matches a modern dark-glass UI similar to the reference: three slider cards on top, a large results card below, and a formula strip at the bottom.
+
+IMPORTANT: This is NOT a currency converter. It’s a PPC bidding calculator.
+
+TECH STACK (Replit-friendly)
+- React + Vite (JavaScript or TypeScript)
+- Styling: Tailwind CSS (preferred). If Tailwind setup fails, use clean CSS with the same look.
+- No backend required (pure frontend) for MVP.
+- Use localStorage for saving last used values.
+
+UI REQUIREMENTS (Match screenshot layout)
+1) Page (dark background with subtle gradient)
+- Top pill label: “PPC Bidding Tool”
+- Big title: “Target CPA Calculator”
+- Subtitle: “Find your maximum cost per acquisition to stay profitable.”
+
+2) Top 3 Cards (in one row on desktop; stack on mobile)
+Card A: Lifetime Profit
+- Icon on top-left (simple circle icon)
+- Helper text: “Average profit per customer over their lifetime”
+- Big value display (currency formatted) e.g. ₹5,000
+- Slider:
+  - Range: min 500 to max 100000
+  - Step: 100
+  - Default: 5000
+- Show min and max labels under slider.
+
+Card B: Acquisition Budget
+- Helper text: “Percentage of profit allocated to customer acquisition”
+- Big value display e.g. 50%
+- Slider:
+  - Range: min 5% to max 100%
+  - Step: 1
+  - Default: 50%
+
+Card C: Conversion Rate
+- Helper text: “Percentage of leads that become paying customers”
+- Big value display e.g. 10%
+- Slider:
+  - Range: min 1% to max 100%
+  - Step: 1
+  - Default: 10%
+
+3) Results Large Card (below)
+Left side:
+- Heading: “Your Target CPA”
+- Big highlighted amount like ₹2500.00
+- Caption: “Maximum you should pay per acquisition”
+
+Right side (two lines with arrow icon):
+- “Max cost per lead: ₹X.XX”
+- “Profit retained per customer: ₹Y.YY”
+
+4) Bottom formula strip
+- Small bar with text:
+  “Formula: Target CPA = Lifetime Profit × Acquisition Budget % × Conversion Rate %”
+
+CALCULATION LOGIC (must match screenshot)
+Inputs:
+- lifetimeProfit (currency number)
+- acquisitionBudgetPct (0–100)
+- conversionRatePct (0–100)
+
+Compute:
+- targetCPA = lifetimeProfit * (acquisitionBudgetPct/100) * (conversionRatePct/100)
+
+Also compute:
+- maxCostPerLead = targetCPA * (conversionRatePct/100)
+  (because CPA = CPL / ConversionRate -> CPL = CPA * ConversionRate)
+
+- profitRetainedPerCustomer = lifetimeProfit - targetCPA
+
+Formatting:
+- currency symbol should be selectable:
+  default “₹”
+  add a small currency dropdown (₹, $, €, £, AED) — keep it minimal.
+- Display with 2 decimals in results card.
+- Sliders show big numbers without decimals where appropriate.
+
+INTERACTIONS
+- Smooth slider interactions; update results live as sliders move.
+- Add “Reset” button (small) to set defaults.
+- Save inputs to localStorage and restore on load.
+- Responsive design: cards stack on mobile.
+
+DESIGN STYLING GUIDELINES
+- Dark glassmorphism cards (semi-transparent, soft border, subtle shadow)
+- Accent color: teal/cyan highlights for slider track + big result text
+- Rounded corners (large radius)
+- Typography: bold title, muted helper text
+
+DELIVERABLES
+1) Full React + Vite project code
+2) Components:
+   - App layout
+   - SliderCard component
+   - ResultsCard component
+   - CurrencyDropdown component
+3) Utility functions for:
+   - formatCurrency
+   - clamp + parse
+4) README for Replit:
+   - npm install
+   - npm run dev
+
+QUALITY
+- Code should be clean, commented, and easy to extend.
+- No external paid UI kits required.
+
+BONUS (optional)
+- Add a small “Copy result” button to copy Target CPA.
+- Add tiny tooltip icons explaining each metric.
